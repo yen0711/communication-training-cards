@@ -342,5 +342,268 @@ body {
   color: #999;
   margin-top: 4px;
 }
+/* =======================
+   Voice Page 專用樣式
+   ======================= */
+
+.app-main-voice {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+}
+
+.voice-mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
+}
+
+.voice-tab {
+  flex: 1 1 auto;
+  border-radius: 999px;
+  border: 1px solid #ddd;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  background: #f9fafb;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.voice-tab.active {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.25);
+}
+
+.voice-progress-bar {
+  margin: 0.25rem 0 1rem;
+  height: 8px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.voice-progress-fill {
+  height: 100%;
+  width: 12%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #22c55e, #3b82f6);
+  transition: width 0.25s ease-out;
+}
+
+/* 共用 panel */
+.voice-panel {
+  display: none;
+}
+
+.voice-panel.active {
+  display: block;
+}
+
+/* A. 跟讀練習 */
+.voice-character-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.voice-character {
+  width: 82px;
+  height: 120px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #a855f7, #4f46e5);
+  position: relative;
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.3);
+}
+
+.voice-character::after {
+  content: "";
+  position: absolute;
+  inset: auto 10px -12px 10px;
+  height: 20px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.1);
+  filter: blur(4px);
+}
+
+.voice-bubble {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 0.75rem 0.9rem;
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.35);
+}
+
+.voice-audio-btn {
+  border: none;
+  background: #eff6ff;
+  color: #1d4ed8;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+  cursor: pointer;
+}
+
+.voice-sentence {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.voice-sentence-zh {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.voice-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.btn-primary,
+.btn-secondary {
+  flex: 1 1 0;
+  padding: 0.6rem 0.75rem;
+  border-radius: 999px;
+  border: none;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.4);
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.voice-score-text,
+.voice-helper-text {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+/* B. 肯定句 */
+.section-title {
+  font-size: 1rem;
+  margin: 0.5rem 0 0.4rem;
+}
+
+.voice-category-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+
+.chip {
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.chip.active {
+  background: #f97316;
+  border-color: #f97316;
+  color: #fff;
+}
+
+.affirm-card {
+  margin-top: 0.25rem;
+  background: #f9fafb;
+  border-radius: 18px;
+  padding: 1rem 1rem 1.1rem;
+  box-shadow: 0 8px 22px rgba(148, 163, 184, 0.3);
+}
+
+.affirm-tag {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 0.3rem;
+}
+
+.affirm-text {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: #111827;
+}
+
+/* C. 配對小測驗 */
+.match-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0.75rem 0;
+}
+
+.match-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0.7rem 0.75rem;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.08s ease-out, box-shadow 0.08s ease-out,
+    border-color 0.08s ease-out, background 0.08s ease-out;
+}
+
+.match-main {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.match-sub {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.match-card.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.25);
+}
+
+.match-card.correct {
+  border-color: #22c55e;
+  background: #ecfdf5;
+  color: #15803d;
+}
+
+.match-card:disabled {
+  cursor: default;
+}
+
+/* RWD */
+@media (min-width: 768px) {
+  .match-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .voice-character-block {
+    gap: 1.25rem;
+  }
+}
 
 }

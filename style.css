@@ -182,4 +182,165 @@ body {
   .card p {
     font-size: 1rem;
   }
+  /* ===== 語音練習頁 voice.html ===== */
+
+.voice-page {
+  background: #f5f5f7;
+}
+
+.voice-app {
+  max-width: 480px;
+  margin: 0 auto 40px;
+  padding: 0 16px 24px;
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0 8px;
+  overflow-x: auto;
+}
+
+.mode-tab {
+  flex: 1;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: 14px;
+  background: #ececf2;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.mode-tab.active {
+  background: #2f80ed;
+  color: #fff;
+}
+
+.category-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: #666;
+}
+
+.category-pill {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.category-pill.active {
+  background: #ffd5a8;
+}
+
+.voice-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px 16px 20px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+.voice-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.voice-progress-bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 999px;
+  background: #ececf2;
+  overflow: hidden;
+}
+
+.voice-progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: #6ad36a;
+  transition: width 0.3s ease;
+}
+
+.voice-progress-text {
+  font-size: 12px;
+  color: #555;
+}
+
+.voice-hint {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.voice-sentence-bubble {
+  position: relative;
+  background: #f7f8ff;
+  border-radius: 18px;
+  padding: 16px 40px 16px 16px;
+  margin-bottom: 14px;
+}
+
+.voice-sentence {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.icon-btn {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: none;
+  background: transparent;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.voice-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.primary-btn,
+.ghost-btn {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.primary-btn {
+  background: #2f80ed;
+  color: #fff;
+}
+
+.ghost-btn {
+  background: #f1f2f6;
+  color: #333;
+}
+
+.voice-feedback {
+  font-size: 13px;
+  color: #666;
+  min-height: 36px;
+}
+
+.voice-system-notice {
+  font-size: 12px;
+  color: #999;
+  margin-top: 4px;
+}
+
 }

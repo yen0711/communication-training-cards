@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  margin: 0;
+  padding: 0;
+}
+
+.app-header {
+  padding: 20px;
+  background: #fff;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #888;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #e8e8e8;
+}
+
+.card {
+  margin: 20px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.app-footer {
+  text-align: center;
+  padding: 10px;
+  color: #aaa;
+  font-size: 12px;
+}

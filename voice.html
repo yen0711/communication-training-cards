@@ -2,88 +2,118 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>語音練習｜溝通訓練卡</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>語音與肯定句訓練 – 每日 1 分鐘溝通練習卡</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css?v=3" />
 </head>
-<body class="voice-page">
+<body class="app app-voice">
+
   <header class="app-header">
-    <a href="index.html" class="back-link">← 回到首頁</a>
-    <h1>語音練習</h1>
-    <p class="app-subtitle">跟著聲音念一句，練習表達與節奏。</p>
+    <a href="./" class="back-link">← 回到每日 1 分鐘溝通練習卡</a>
+    <h1 class="app-title">語音 & 肯定句訓練室</h1>
+    <p class="app-subtitle">今天只練一小步就很好了。</p>
   </header>
 
-  <main class="voice-app">
-    <!-- 模式切換：肯定語 / 繞口令 / 小故事 -->
-    <section class="mode-tabs" aria-label="練習模式">
-      <button class="mode-tab active" data-mode="affirmation">正面肯定語</button>
-      <button class="mode-tab" data-mode="tongue">TTL 繞口令</button>
-      <button class="mode-tab" data-mode="story">說故事跟讀</button>
-    </section>
+  <main class="app-main app-main-voice">
+    <!-- 模式切換 -->
+    <nav class="voice-mode-tabs" aria-label="練習模式">
+      <button class="voice-tab active" data-mode="repeat">🎧 跟著說</button>
+      <button class="voice-tab" data-mode="affirm">✨ 正面肯定句</button>
+      <button class="voice-tab" data-mode="match">🧩 配對小測驗</button>
+    </nav>
 
-    <!-- 肯定語：主題分類 -->
-    <section class="category-bar" data-visible-for="affirmation">
-      <button class="category-pill active" data-category="money">💰 金錢富足</button>
-      <button class="category-pill" data-category="love">💞 感情關係</button>
-      <!-- 之後可以再加：自信 / 事業 / 療癒 等 -->
-    </section>
+    <!-- 進度條 -->
+    <div class="voice-progress-bar">
+      <div class="voice-progress-fill" id="voiceProgressFill"></div>
+    </div>
 
-    <!-- 其他模式之後要用也可以掛自己的分類列 -->
-    <section class="category-bar" data-visible-for="tongue" hidden>
-      <span class="category-label">繞口令主題（之後可細分）：</span>
-      <span class="category-hint">目前先隨機練習。</span>
-    </section>
-
-    <section class="category-bar" data-visible-for="story" hidden>
-      <span class="category-label">小故事段落：</span>
-      <span class="category-hint">會用較短的句子方便跟讀。</span>
-    </section>
-
-    <!-- 主練習卡片（共用 UI） -->
-    <section class="voice-card" aria-live="polite">
-      <!-- 進度條 -->
-      <div class="voice-progress">
-        <div class="voice-progress-bar">
-          <div class="voice-progress-fill" id="progressFill"></div>
+    <!-- A. 跟讀練習（Duolingo 風格） -->
+    <section id="mode-repeat" class="voice-panel active" aria-label="跟讀練習">
+      <div class="voice-character-block">
+        <div class="voice-character avatar-purple"></div>
+        <div class="voice-bubble">
+          <button class="voice-audio-btn" id="repeatPlayBtn">
+            🔊 播放一次
+          </button>
+          <p class="voice-sentence" id="repeatSentenceEn">I'm very good, thanks.</p>
+          <p class="voice-sentence-zh" id="repeatSentenceZh">我很好，謝謝。</p>
         </div>
-        <span class="voice-progress-text">
-          <span id="currentIndex">1</span>/<span id="totalCount">1</span>
-        </span>
       </div>
 
-      <!-- 模式提醒 -->
-      <p class="voice-hint" id="modeHint">跟著聲音一起念：</p>
-
-      <!-- 句子本體 -->
-      <div class="voice-sentence-bubble">
-        <button id="playBtn" class="icon-btn" aria-label="播放語音">
-          🔊
+      <div class="voice-controls">
+        <button class="btn-primary" id="repeatRecordBtn">
+          🎙️ 開始跟著念
         </button>
-        <p id="sentenceText" class="voice-sentence">
-          輕輕深呼吸，準備開始練習。
-        </p>
-      </div>
-
-      <!-- 操作：錄音＋下一句 -->
-      <div class="voice-actions">
-        <button id="recordBtn" class="primary-btn">
-          🎙 開始跟讀
-        </button>
-        <button id="nextBtn" class="ghost-btn">
+        <button class="btn-secondary" id="repeatSkipBtn">
           下一句 →
         </button>
       </div>
 
-      <!-- 回饋訊息 -->
-      <p id="feedback" class="voice-feedback">
-        按 🔊 播放，再跟著念一次，看看嘴巴說起來是什麼感覺。
+      <p class="voice-score-text" id="repeatScoreText">
+        小提示：先聽 1～2 次，再一起慢慢念就好。
       </p>
-
-      <!-- 系統提示（例如瀏覽器不支援語音辨識）-->
-      <p id="systemNotice" class="voice-system-notice"></p>
     </section>
+
+    <!-- B. 正面肯定句練習 -->
+    <section id="mode-affirm" class="voice-panel" aria-label="正面肯定句">
+      <h2 class="section-title">選一個你想練習的主題</h2>
+      <div class="voice-category-row" id="affirmCategoryRow">
+        <button class="chip active" data-cat="self">自我價值</button>
+        <button class="chip" data-cat="money">金錢與豐盛</button>
+        <button class="chip" data-cat="love">感情與親密</button>
+        <button class="chip" data-cat="social">人際與表達</button>
+        <button class="chip" data-cat="career">事業與創造</button>
+      </div>
+
+      <div class="affirm-card">
+        <p class="affirm-tag" id="affirmTag">自我價值 · #1</p>
+        <p class="affirm-text" id="affirmText">
+          即使現在還不完美，我依然值得被溫柔對待。
+        </p>
+      </div>
+
+      <div class="voice-controls">
+        <button class="btn-primary" id="affirmSpeakBtn">🔊 聽我念一次</button>
+        <button class="btn-secondary" id="affirmNextBtn">換一句</button>
+      </div>
+
+      <p class="voice-helper-text">
+        可以試著：<strong>先聽一句 → 再自己念三遍</strong>，讓大腦慢慢相信這句話。
+      </p>
+    </section>
+
+    <!-- C. 配對小測驗 -->
+    <section id="mode-match" class="voice-panel" aria-label="配對小測驗">
+      <h2 class="section-title">小測驗：找出對應的成對句子</h2>
+
+      <div class="voice-category-row" id="matchCategoryRow">
+        <button class="chip active" data-cat="self">自我價值</button>
+        <button class="chip" data-cat="money">金錢與豐盛</button>
+        <button class="chip" data-cat="love">感情與親密</button>
+        <button class="chip" data-cat="social">人際與表達</button>
+        <button class="chip" data-cat="career">事業與創造</button>
+      </div>
+
+      <div class="match-grid" id="matchGrid">
+        <!-- JS 產生 8 張卡片 -->
+      </div>
+
+      <div class="voice-controls">
+        <button class="btn-primary" id="matchCheckBtn">檢查答案 ✅</button>
+        <button class="btn-secondary" id="matchRestartBtn">再出一題 🔄</button>
+      </div>
+
+      <p class="voice-score-text" id="matchMessage">
+        規則：每次點兩張卡片，試著把成對的中文 & 肯定句配在一起。
+      </p>
+    </section>
+
   </main>
 
-  <script src="voice.js"></script>
+  <footer class="app-footer">
+    <small>心映好事 · 溝通 × 情緒 × 覺察小練習</small>
+  </footer>
+
+  <script src="voice.js?v=3"></script>
 </body>
 </html>

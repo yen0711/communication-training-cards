@@ -1,327 +1,445 @@
-// ===== 資料區：可以慢慢補充句子 =====
+// ====== 資料區：跟讀句子 ======
+const repeatSentences = [
+  {
+    en: "I'm very good, thanks.",
+    zh: "我很好，謝謝你關心。",
+    cat: "日常問候"
+  },
+  {
+    en: "Take your time, I'm listening.",
+    zh: "你慢慢說，我在聽。",
+    cat: "傾聽"
+  },
+  {
+    en: "Can you tell me more about that?",
+    zh: "你可以多說一點嗎？",
+    cat: "好奇提問"
+  },
+  {
+    en: "I hear you, that sounds really tough.",
+    zh: "我聽見了，這真的不容易。",
+    cat: "共情回應"
+  },
+  {
+    en: "Let me check if I understood you correctly.",
+    zh: "我確認一下我有沒有聽懂。",
+    cat: "澄清確認"
+  },
+  {
+    en: "From your side, it feels unfair, right?",
+    zh: "站在你的角度，會覺得很不公平，對嗎？",
+    cat: "理解對方"
+  },
+  {
+    en: "Right now I need a short break.",
+    zh: "我現在需要先暫停一下。",
+    cat: "設立界線"
+  },
+  {
+    en: "I want to understand you, not judge you.",
+    zh: "我想了解你，而不是要評價你。",
+    cat: "安全感"
+  },
+  {
+    en: "Let's find a solution that works for both of us.",
+    zh: "我們來找一個對彼此都可以的做法。",
+    cat: "協調"
+  },
+  {
+    en: "Thank you for being honest with me.",
+    zh: "謝謝你願意跟我說實話。",
+    cat: "表達感謝"
+  }
+];
 
-// 正面肯定語：先放金錢 & 感情（可以繼續加）
+// ====== 資料區：肯定句 ======
 const affirmations = {
+  self: [
+    "即使現在還不完美，我依然值得被溫柔對待。",
+    "我的價值不取決於今天的效率，而在於我這個人。",
+    "我正在成為一個越來越喜歡自己的大人。",
+    "我可以慢慢來，不代表我做不到。",
+    "就算今天只完成一小步，也是往前。",
+    "我允許自己脆弱，同時也相信自己的韌性。",
+    "我有權說不，也有權改變主意。",
+    "我值得被看見，而不是被忽略。",
+    "我正在練習把注意力從批評，移回到關心自己。",
+    "我的存在，本身就是一份禮物。"
+  ],
   money: [
-    "我值得擁有財富。",
-    "金錢是我正能量的延伸。",
-    "我越輕鬆，越容易吸引富足。",
-    "我的價值不斷提升。",
-    "我願意學習與金錢合作。",
-    "每一天我都在變得更富足。",
-    "我的收入持續增加。",
-    "我的努力被世界看見。",
-    "金錢流向我、支持我。",
-    "我值得被支付高額報酬。",
-    "財富與我相遇是自然的事。",
-    "我做的事情創造價值，因此帶來金錢。",
-    "我能創造新的收入來源。",
-    "我是富足能量的磁鐵。",
-    "我懂得管理、珍惜與使用金錢。",
-    "我的財務更穩定、更踏實。",
-    "錢來得正確、乾淨且輕鬆。",
-    "我正在變成更懂金錢的版本。",
-    "我祝福所有人變得富足，也祝福自己。",
-    "我允許自己擁有美好的物質生活。",
-    "世界支持我的財務成長。",
-    "我擁有吸引幸運的能量。",
-    "我的收穫大於我的付出。",
-    "富足是一種我的自然狀態。",
-    "金錢為我帶來自由而非壓力。",
-    "我值得擁有穩定的被動收入。",
-    "我擁有未來的財富藍圖。",
-    "我對金錢保持開放與自在。",
-    "我越感恩，越富足。",
-    "我擁有選擇人生的能力。",
-    "我越活越有價值。",
-    "財務機會總是找到我。",
-    "我做的每件事都帶來成長或收益。",
-    "我常常遇到帶來好運的人。",
-    "我與金錢之間的關係是健康的。",
-    "我理解金錢只是能量的一部分。",
-    "我允許自己擁有多種財務選擇。",
-    "我的富足狀態帶給他人希望。",
-    "我擁有智慧也擁有幸運。",
-    "我的生活持續向上、向好。",
-    "我用錢創造世界的美好。",
-    "每一筆收入都是宇宙對我的支持。",
-    "我安全、穩定且被支持。",
-    "我的天賦會被看見並帶來收益。",
-    "金錢以我意想不到的方式流入。",
-    "我每天都離我的財務目標更近。",
-    "我敢於思考更大的富足。",
-    "世界正在準備更多的財富給我。",
-    "我適合、我值得、我願意。",
-    "我正在成為更富足的自己。"
+    "我正在學習與金錢建立穩定、安心的關係。",
+    "金錢流向尊重自己價值的人，我也正在成為這樣的人。",
+    "我允許自己收穫與投入相稱的報酬。",
+    "我有能力做出更聰明的金錢選擇，一點一點來就好。",
+    "每一筆收入與支出，都是在幫我認識自己。",
+    "我值得擁有足夠的資源，過有餘裕的生活。",
+    "我不需要完美財務狀態，才有資格喜歡自己。",
+    "我願意學習，而不是再責怪過去的自己。",
+    "金錢是工具，不是評價我的標籤。",
+    "我可以一邊照顧內在，一邊慢慢累積外在豐盛。"
   ],
   love: [
-    "我值得被真心愛。",
-    "我能吸引健康的關係。",
-    "我是值得被珍惜的人。",
-    "我表達需求是安全的。",
-    "我值得被聽見、被理解。",
-    "我願意體驗溫柔的愛。",
-    "我正在吸引成熟且穩定的連結。",
-    "我在關係中保持真實。",
-    "我值得擁有一段互相支持的關係。",
-    "我願意用新的方式愛與被愛。",
-    "愛是我天生的能力。",
-    "我會遇到珍惜我的人。",
-    "我值得被好好對待。",
-    "我不需要裝成別人也能被愛。",
-    "我放下過去，迎接新的連結。",
-    "我的感情世界越來越健康。",
-    "我能坦然面對自己的脆弱。",
-    "我值得被溫柔擁抱。",
-    "我能找到與我頻率一致的人。",
-    "我願意選擇對的人，而不是將就。",
-    "我值得穩定與安全感。",
-    "我願意相信愛仍然在路上。",
-    "我正在成為更懂得愛的人。",
-    "我值得一段成熟的感情。",
-    "我願意打開心、迎接支持。",
-    "我的邊界是健康且清晰的。",
-    "我安全、穩定、值得。",
-    "我愛的人也會愛我。",
-    "我值得一段互相成就的關係。",
-    "我能夠擁有幸福。",
-    "我願意用善意與理解建立關係。",
-    "愛對我來說越來越輕鬆。",
-    "我吸引尊重我、欣賞我的人。",
-    "我能在關係中保持自我。",
-    "我的愛是健康且穩定的力量。",
-    "我值得被選擇。",
-    "我願意放下舊傷，重新開始。",
-    "我正在創造美好的連結。",
-    "愛正在靠近我。",
-    "我值得被深深愛著。",
-    "我願意讓安全的愛靠近。",
-    "我是被珍惜的、有價值的。",
-    "我值得被看見真正的樣子。",
-    "我能在關係中感到輕鬆。",
-    "我值得擁有幸福的伴侶。",
-    "我信任宇宙正在引導我。",
-    "我的感情生活越來越順利。",
-    "我值得被疼愛與支持。",
-    "我是一個美好的人，也值得美好的愛。",
-    "我願意迎接成熟、健康的愛。"
+    "我值得在關係裡被好好對待，而不是勉強撐著。",
+    "我可以同時愛對方，也照顧自己的需求。",
+    "真誠的溝通，有時會害怕，但也帶來真正的靠近。",
+    "我不需要完美，才配得上一段健康的感情。",
+    "我正在學習分辨：是愛，還是怕被丟下。",
+    "我有權選擇讓自己安心的人，而不是只抓住熟悉。",
+    "關係裡的衝突，不代表失敗，而是一起練習的機會。",
+    "我可以慢慢走進一段關係，而不是急著證明什麼。",
+    "我願意相信，有人會欣賞真實的我。",
+    "我也可以成為自己最穩定的那個陪伴。"
+  ],
+  social: [
+    "我不需要一直說話，也可以是被喜歡的那種人。",
+    "沉默不代表我沒有價值，只是我在感受與整理。",
+    "我有權選擇想說的和不想說的。",
+    "就算講話卡住，也不會抹滅我其他的優點。",
+    "我正在練習，把注意力從『會不會出糗』移到『想連結什麼』。",
+    "我可以用自己的步調，慢慢擴大人際圈。",
+    "不合拍的人離開，是為了騰出位置給對的人。",
+    "我說出口的每一句真心話，都在為自己負責。",
+    "我可以學習表達，而不是只把情緒悶在心裡。",
+    "我值得被理解，不是只被要求懂事。"
+  ],
+  career: [
+    "我正在打造的是一個長期可以持續的生活，而不只是短暫的爆衝。",
+    "我不用跟別人的時間線比，只要比昨天更靠近自己的方向一點。",
+    "我做的每一個小實驗，都是在為未來累積經驗值。",
+    "我允許自己換跑道，因為成長本來就會改變選擇。",
+    "我可以同時追求穩定與喜歡的事情，不必二選一。",
+    "休息不是退步，而是為了走更長遠的路。",
+    "我正在學習把焦慮變成行動，而不是停在自我否定裡。",
+    "我做得夠好，未完成的部分，明天再來就好。",
+    "我值得找到一份與性格匹配的工作型態。",
+    "我的價值不只在產出，更在於我帶來的視角與心。"
   ]
 };
 
-// 繞口令 & 小故事：先放幾句，之後可以慢慢擴充
-const tongueTwisters = [
-  "黑化肥發灰，灰化肥發黑。",
-  "吃葡萄不吐葡萄皮，不吃葡萄倒吐葡萄皮。",
-  "四是四，十是十，十四是十四，四十是四十。"
-];
+// ====== 資料區：配對題（中 → 肯定句） ======
+const matchPairs = affirmations; // 直接沿用，每句就是一個 pair
 
-const shortStories = [
-  "今天的你已經很努力了，這一句話，是為了讓你慢下來，對自己好一點。",
-  "有時候情緒只是來敲門的客人，陪它坐一會兒，它就會慢慢離開。"
-];
+// ====== 共用狀態 ======
+let currentMode = "repeat";
+let repeatIndex = 0;
+let affirmCat = "self";
+let affirmIndex = 0;
+let matchCat = "self";
+let matchSelected = [];
+let matchAnswerMap = {}; // cardId -> index
+let matchCorrectSet = new Set();
 
-// ===== 狀態管理 =====
-let currentMode = "affirmation"; // affirmation / tongue / story
-let currentCategory = "money";   // money / love ...
-let currentIndex = 0;
-
-// DOM
-const sentenceText = document.getElementById("sentenceText");
-const playBtn      = document.getElementById("playBtn");
-const recordBtn    = document.getElementById("recordBtn");
-const nextBtn      = document.getElementById("nextBtn");
-const feedback     = document.getElementById("feedback");
-const systemNotice = document.getElementById("systemNotice");
-const modeHint     = document.getElementById("modeHint");
-const currentIndexSpan = document.getElementById("currentIndex");
-const totalCountSpan   = document.getElementById("totalCount");
-const progressFill     = document.getElementById("progressFill");
-
-// 模式 tab
-document.querySelectorAll(".mode-tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document
-      .querySelectorAll(".mode-tab")
-      .forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    currentMode = btn.dataset.mode;
-    currentIndex = 0;
-
-    updateVisibleCategories();
-    updateSentence();
-  });
-});
-
-// 類別 pill（肯定語用）
-document.querySelectorAll(".category-pill").forEach(pill => {
-  pill.addEventListener("click", () => {
-    document
-      .querySelectorAll(".category-pill")
-      .forEach(p => p.classList.remove("active"));
-    pill.classList.add("active");
-
-    currentCategory = pill.dataset.category;
-    currentIndex = 0;
-    updateSentence();
-  });
-});
-
-// 顯示對應模式的分類列
-function updateVisibleCategories() {
-  document.querySelectorAll(".category-bar").forEach(bar => {
-    const visibleFor = bar.dataset.visibleFor;
-    bar.hidden = visibleFor !== currentMode;
-  });
-
-  if (currentMode === "affirmation") {
-    modeHint.textContent = "跟著聲音，一句一句對自己說：";
-  } else if (currentMode === "tongue") {
-    modeHint.textContent = "先聽一遍，然後試著跟著繞口令念：";
-  } else {
-    modeHint.textContent = "把這句故事念出來，感受語氣與節奏：";
-  }
-}
-
-// 取得目前句子清單
-function getCurrentList() {
-  if (currentMode === "affirmation") {
-    return affirmations[currentCategory] || [];
-  }
-  if (currentMode === "tongue") {
-    return tongueTwisters;
-  }
-  if (currentMode === "story") {
-    return shortStories;
-  }
-  return [];
-}
-
-// 更新畫面句子＋進度
-function updateSentence() {
-  const list = getCurrentList();
-  if (list.length === 0) {
-    sentenceText.textContent = "目前這個分類還沒有內容。";
-    totalCountSpan.textContent = "0";
-    currentIndexSpan.textContent = "0";
-    progressFill.style.width = "0%";
+// ====== 工具：TTS ======
+function speakText(text, lang = "zh-TW") {
+  if (!("speechSynthesis" in window)) {
+    alert("你的瀏覽器暫不支援語音播放（Speech Synthesis）。可以改成自己默念喔。");
     return;
   }
-
-  if (currentIndex >= list.length) currentIndex = 0;
-
-  const sentence = list[currentIndex];
-  sentenceText.textContent = sentence;
-
-  totalCountSpan.textContent = String(list.length);
-  currentIndexSpan.textContent = String(currentIndex + 1);
-
-  const progress = ((currentIndex + 1) / list.length) * 100;
-  progressFill.style.width = `${progress}%`;
-
-  feedback.textContent = "按 🔊 播放，跟著念一次，錯字沒關係，先熟悉聲音與節奏就好。";
-}
-
-// TTS 播放
-function speak(text) {
-  if (!window.speechSynthesis) {
-    systemNotice.textContent = "此裝置不支援語音播放，改用自己朗讀即可。";
-    return;
-  }
-  systemNotice.textContent = "";
-
   const utter = new SpeechSynthesisUtterance(text);
-  // 盡量用中文聲音
-  utter.lang = "zh-TW";
-  utter.rate = currentMode === "tongue" ? 0.9 : 0.95;
-  utter.pitch = 1;
-
+  utter.lang = lang;
   window.speechSynthesis.cancel();
   window.speechSynthesis.speak(utter);
 }
 
-// 語音辨識（簡易版）
-let recognition = null;
-if ("webkitSpeechRecognition" in window || "SpeechRecognition" in window) {
-  const SR =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-  recognition = new SR();
-  recognition.lang = "zh-TW";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  recognition.onresult = event => {
-    const userSpeech = event.results[0][0].transcript.trim();
-    const target = sentenceText.textContent.trim();
-    evaluateSpeech(userSpeech, target);
-  };
-
-  recognition.onerror = () => {
-    feedback.textContent = "語音辨識發生小狀況，沒關係，當作多練一次就好。";
-  };
-} else {
-  systemNotice.textContent =
-    "這個瀏覽器暫時不支援語音辨識，只能用 TTS 跟自己朗讀的方式練習。";
+// 簡單相似度（給跟讀練習用）
+function similarity(a, b) {
+  a = a.toLowerCase().trim();
+  b = b.toLowerCase().trim();
+  if (!a || !b) return 0;
+  const setA = new Set(a.split(/\s+/));
+  const setB = new Set(b.split(/\s+/));
+  const inter = [...setA].filter(x => setB.has(x)).length;
+  const union = new Set([...setA, ...setB]).size;
+  return inter / union;
 }
 
-// 簡單評分（非常溫柔版）
-function evaluateSpeech(userText, targetText) {
-  if (!userText) {
-    feedback.textContent = "好像沒有收到聲音，再試一次沒關係。";
+// ====== DOM 取得 ======
+const modeTabs = document.querySelectorAll(".voice-tab");
+const panels = {
+  repeat: document.getElementById("mode-repeat"),
+  affirm: document.getElementById("mode-affirm"),
+  match: document.getElementById("mode-match")
+};
+const progressFill = document.getElementById("voiceProgressFill");
+
+// repeat
+const repeatSentenceEnEl = document.getElementById("repeatSentenceEn");
+const repeatSentenceZhEl = document.getElementById("repeatSentenceZh");
+const repeatPlayBtn = document.getElementById("repeatPlayBtn");
+const repeatRecordBtn = document.getElementById("repeatRecordBtn");
+const repeatSkipBtn = document.getElementById("repeatSkipBtn");
+const repeatScoreText = document.getElementById("repeatScoreText");
+
+// affirm
+const affirmCategoryRow = document.getElementById("affirmCategoryRow");
+const affirmTagEl = document.getElementById("affirmTag");
+const affirmTextEl = document.getElementById("affirmText");
+const affirmSpeakBtn = document.getElementById("affirmSpeakBtn");
+const affirmNextBtn = document.getElementById("affirmNextBtn");
+
+// match
+const matchCategoryRow = document.getElementById("matchCategoryRow");
+const matchGrid = document.getElementById("matchGrid");
+const matchCheckBtn = document.getElementById("matchCheckBtn");
+const matchRestartBtn = document.getElementById("matchRestartBtn");
+const matchMessageEl = document.getElementById("matchMessage");
+
+// ====== 模式切換 ======
+modeTabs.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const mode = btn.dataset.mode;
+    if (mode === currentMode) return;
+
+    currentMode = mode;
+
+    modeTabs.forEach(b => b.classList.toggle("active", b === btn));
+    Object.keys(panels).forEach(key => {
+      panels[key].classList.toggle("active", key === mode);
+    });
+
+    if (mode === "repeat") updateRepeatUI();
+    if (mode === "affirm") updateAffirmUI();
+    if (mode === "match") setupMatchGrid();
+  });
+});
+
+// ====== A. 跟讀練習 ======
+function updateRepeatUI() {
+  const data = repeatSentences[repeatIndex];
+  if (!data) return;
+  repeatSentenceEnEl.textContent = data.en;
+  repeatSentenceZhEl.textContent = data.zh;
+  repeatScoreText.textContent = `主題：${data.cat} · 可以先聽，覺得準備好再跟著念。`;
+  updateProgress((repeatIndex + 1) / repeatSentences.length);
+}
+
+repeatPlayBtn.addEventListener("click", () => {
+  const data = repeatSentences[repeatIndex];
+  speakText(data.en, "en-US");
+});
+
+repeatSkipBtn.addEventListener("click", () => {
+  repeatIndex = (repeatIndex + 1) % repeatSentences.length;
+  updateRepeatUI();
+});
+
+repeatRecordBtn.addEventListener("click", () => {
+  // 提醒：SpeechRecognition 在 iOS Safari 還不支援
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    alert("目前瀏覽器不支援語音辨識。\n可以改成：聽一句 → 自己念三遍 → 心裡給自己 60～100 分就好。");
     return;
   }
 
-  const normalize = s =>
-    s.replace(/[，。、。！？!?\s]/g, "").toLowerCase();
+  const data = repeatSentences[repeatIndex];
+  const recog = new SpeechRecognition();
+  recog.lang = "en-US";
+  recog.interimResults = false;
+  recog.maxAlternatives = 1;
 
-  const u = normalize(userText);
-  const t = normalize(targetText);
+  repeatScoreText.textContent = "正在聽你說話，請開始念句子…";
+  recog.start();
 
-  let score = 0;
-  let minLen = Math.min(u.length, t.length);
-  for (let i = 0; i < minLen; i++) {
-    if (u[i] === t[i]) score++;
+  recog.onresult = (event) => {
+    const spoken = event.results[0][0].transcript || "";
+    const score = Math.round(similarity(spoken, data.en) * 100);
+    repeatScoreText.textContent = `系統聽到：${spoken} · 相似度約 ${score} 分（只是一個參考，重點是你有開口練習 💪）`;
+  };
+
+  recog.onerror = () => {
+    repeatScoreText.textContent = "語音辨識剛剛沒有成功，但沒關係，你願意再試一次就很棒了。";
+  };
+});
+
+// ====== B. 正面肯定句 ======
+function updateAffirmUI() {
+  const list = affirmations[affirmCat] || [];
+  if (!list.length) return;
+  if (affirmIndex >= list.length) affirmIndex = 0;
+
+  const text = list[affirmIndex];
+  affirmTextEl.textContent = text;
+  affirmTagEl.textContent = `${catLabel(affirmCat)} · #${affirmIndex + 1}`;
+  updateProgress((affirmIndex + 1) / list.length);
+}
+
+function catLabel(key) {
+  switch (key) {
+    case "self": return "自我價值";
+    case "money": return "金錢與豐盛";
+    case "love": return "感情與親密";
+    case "social": return "人際與表達";
+    case "career": return "事業與創造";
+    default: return "";
   }
-  const ratio = minLen ? score / minLen : 0;
-  const percent = Math.round(ratio * 100);
+}
 
-  if (percent > 80) {
-    feedback.textContent = `很好！大約 ${percent}% 接近原句，聲音可以再放鬆一點。`;
-  } else if (percent > 50) {
-    feedback.textContent = `有抓到大致意思了（約 ${percent}%），可以再慢一點、一字一字清楚念。`;
+// 切換分類（肯定句）
+affirmCategoryRow.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  affirmCat = btn.dataset.cat;
+  affirmIndex = 0;
+  [...affirmCategoryRow.querySelectorAll("button")].forEach(b => {
+    b.classList.toggle("active", b === btn);
+  });
+  updateAffirmUI();
+});
+
+affirmSpeakBtn.addEventListener("click", () => {
+  const list = affirmations[affirmCat] || [];
+  const text = list[affirmIndex] || "";
+  if (text) speakText(text, "zh-TW");
+});
+
+affirmNextBtn.addEventListener("click", () => {
+  const list = affirmations[affirmCat] || [];
+  if (!list.length) return;
+  affirmIndex = (affirmIndex + 1) % list.length;
+  updateAffirmUI();
+});
+
+// ====== C. 配對小測驗 ======
+function setupMatchGrid() {
+  const list = (matchPairs[matchCat] || []).slice();
+  if (list.length < 4) return;
+
+  // 取 4 句做一題
+  const pool = shuffle(list).slice(0, 4);
+
+  matchAnswerMap = {};
+  matchSelected = [];
+  matchCorrectSet.clear();
+  matchGrid.innerHTML = "";
+  matchMessageEl.textContent = "規則：每次點兩張卡片，試著把成對的中文 & 肯定句配在一起。";
+
+  let cards = [];
+  pool.forEach((text, idx) => {
+    const idZh = `c-${idx}-zh`;
+    const idAffirm = `c-${idx}-af`;
+    matchAnswerMap[idZh] = idx;
+    matchAnswerMap[idAffirm] = idx;
+
+    cards.push({
+      id: idZh,
+      type: "zh",
+      text: `#${idx + 1}`,
+      sub: "提示編號"
+    });
+    cards.push({
+      id: idAffirm,
+      type: "af",
+      text,
+      sub: catLabel(matchCat)
+    });
+  });
+
+  cards = shuffle(cards);
+  cards.forEach(card => {
+    const div = document.createElement("button");
+    div.className = "match-card";
+    div.dataset.id = card.id;
+    div.dataset.type = card.type;
+    div.innerHTML = `
+      <span class="match-main">${card.text}</span>
+      <span class="match-sub">${card.sub}</span>
+    `;
+    div.addEventListener("click", () => onMatchCardClick(div));
+    matchGrid.appendChild(div);
+  });
+
+  updateProgress(0.05);
+}
+
+function onMatchCardClick(cardEl) {
+  const id = cardEl.dataset.id;
+  if (matchCorrectSet.has(id)) return;
+
+  // 已經選兩張，就先清掉
+  if (matchSelected.length >= 2) {
+    clearMatchSelection();
+  }
+
+  cardEl.classList.toggle("selected");
+  if (cardEl.classList.contains("selected")) {
+    matchSelected.push(id);
   } else {
-    feedback.textContent = `不用急，先專心把每個字念清楚就好。這次大約 ${percent}% ，下一次會更好。`;
+    matchSelected = matchSelected.filter(x => x !== id);
   }
 }
 
-// 事件：播放
-playBtn.addEventListener("click", () => {
-  speak(sentenceText.textContent);
-});
+function clearMatchSelection() {
+  matchSelected = [];
+  matchGrid.querySelectorAll(".match-card.selected").forEach(el => {
+    el.classList.remove("selected");
+  });
+}
 
-// 事件：錄音
-recordBtn.addEventListener("click", () => {
-  if (!recognition) {
-    feedback.textContent = "目前只能自己對照練習，沒有自動評分沒關係。";
+matchCheckBtn.addEventListener("click", () => {
+  if (matchSelected.length !== 2) {
+    matchMessageEl.textContent = "一次請選兩張卡片喔，再按「檢查答案」。";
     return;
   }
+  const [a, b] = matchSelected;
+  const ia = matchAnswerMap[a];
+  const ib = matchAnswerMap[b];
 
-  feedback.textContent = "開始錄音了，念完之後會自動幫你比對。";
-  systemNotice.textContent = "如果手機有跳出麥克風權限，記得按允許。";
+  if (ia !== undefined && ib !== undefined && ia === ib && a !== b) {
+    // 配對成功
+    matchCorrectSet.add(a);
+    matchCorrectSet.add(b);
+    matchGrid.querySelectorAll(".match-card").forEach(el => {
+      if (el.dataset.id === a || el.dataset.id === b) {
+        el.classList.remove("selected");
+        el.classList.add("correct");
+        el.disabled = true;
+      }
+    });
+    matchSelected = [];
 
-  recognition.abort();
-  recognition.start();
+    const totalPairs = Object.values(matchAnswerMap).reduce((set, v) => set.add(v), new Set()).size;
+    if (matchCorrectSet.size === totalPairs * 2) {
+      matchMessageEl.textContent = "太讚了，全部配對完成！可以再按「再出一題」換新的句子。";
+      updateProgress(1);
+    } else {
+      matchMessageEl.textContent = "配對成功！慢慢來，你做得很好。";
+      updateProgress(matchCorrectSet.size / (totalPairs * 2));
+    }
+  } else {
+    // 不是正確配對
+    matchMessageEl.textContent = "這兩張不是一對，再試一次～";
+  }
 });
 
-// 事件：下一句
-nextBtn.addEventListener("click", () => {
-  const list = getCurrentList();
-  if (list.length === 0) return;
+matchRestartBtn.addEventListener("click", setupMatchGrid);
 
-  currentIndex = (currentIndex + 1) % list.length;
-  updateSentence();
+// 切換分類（配對）
+matchCategoryRow.addEventListener("click", (e) => {
+  const btn = e.target.closest("button");
+  if (!btn) return;
+  matchCat = btn.dataset.cat;
+  [...matchCategoryRow.querySelectorAll("button")].forEach(b => {
+    b.classList.toggle("active", b === btn);
+  });
+  setupMatchGrid();
 });
 
-// 初始化
-updateVisibleCategories();
-updateSentence();
+// ====== 共用：進度條 & 小工具 ======
+function updateProgress(ratio) {
+  const v = Math.max(0, Math.min(1, ratio || 0));
+  progressFill.style.width = `${v * 100}%`;
+}
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// ====== 初始 ======
+updateRepeatUI();
+updateAffirmUI();
+setupMatchGrid();

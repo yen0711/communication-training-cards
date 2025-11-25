@@ -1,55 +1,90 @@
+/* 整體背景與字型 */
 body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+  background: #f7f5f2;
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
+.app {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 24px 20px 16px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* 標題區 */
 .app-header {
-  padding: 20px;
-  background: #fff;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  margin-bottom: 16px;
 }
 
-.title {
+h1 {
   margin: 0;
   font-size: 22px;
-  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .subtitle {
   margin-top: 6px;
   font-size: 14px;
-  color: #888;
+  color: #999;
 }
 
+/* 四個按鈕區塊 */
 .buttons {
-  display: flex;
-  justify-content: space-around;
-  margin: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 16px 0 12px;
 }
 
 button {
-  padding: 12px 20px;
-  font-size: 16px;
+  border-radius: 999px;
   border: none;
-  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 15px;
   cursor: pointer;
-  background: #e8e8e8;
+  background: #f0ede8;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
 }
 
+button:hover {
+  background: #e7e1d8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* 顯示題目的卡片 */
 .card {
-  margin: 20px;
-  padding: 20px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-top: 12px;
+  padding: 16px 14px;
+  background: #faf7f2;
+  border-radius: 12px;
+  border: 1px solid #eee1d1;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
 }
 
+.card-hint {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+/* 底部小字 */
 .app-footer {
   text-align: center;
-  padding: 10px;
-  color: #aaa;
+  margin-top: 14px;
+  color: #b3aa9f;
   font-size: 12px;
 }
